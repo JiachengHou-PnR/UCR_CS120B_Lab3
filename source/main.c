@@ -19,17 +19,20 @@ int main(void)
     DDRA = 0x00; PORTA = 0xFF;
     //DDRB = 0x00; PORTB = 0xFF;
     // Outputs
+    DDRB = 0xFF; PORTB = 0x00;
     DDRC = 0xFF; PORTC = 0x00;
 
     /* Insert your solution below */
-    unsigned char tmpA, tmpC;
+    unsigned char tmpA, tmpB, tmpC;
 
     while (1) 
     {
         tmpA = PINA;
 
-        tmpC = ((tmpA & 0x0F) << 4) | ((tmpA & 0xF0) >> 4);
+        tmpB = ((tmpA & 0xF0) >> 4);
+        tmpC = ((tmpA & 0x0F) << 4);
 
+        PORTB = tmpB;
         PORTC = tmpC;
     }
     return 1;
